@@ -37,5 +37,17 @@ public class Ramp extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+
+    public void extend()
+    {
+    	doubleSolenoid1.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void retract()
+    {
+    	doubleSolenoid1.set(DoubleSolenoid.Value.kReverse);
+    }
+    
+    
 }
 
