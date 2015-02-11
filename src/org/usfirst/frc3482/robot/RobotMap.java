@@ -46,8 +46,8 @@ public class RobotMap {
         rampDoubleSolenoid1 = new DoubleSolenoid(0, 0, 1);      
         LiveWindow.addActuator("Ramp", "Double Solenoid 1", rampDoubleSolenoid1);
         
-        armsArms = new CANTalon(4);
-        //LiveWindow.addActuator("Arms", "Arms", (TalonSRX) armsArms);
+        armsArms = new Talon(4);
+        LiveWindow.addActuator("Arms", "Arms", (Talon) armsArms);
         
         armsLimitSwitch1 = new DigitalInput(0);
         LiveWindow.addSensor("Arms", "Limit Switch 1", armsLimitSwitch1);
@@ -67,17 +67,17 @@ public class RobotMap {
         armsDoubleSolenoid1 = new DoubleSolenoid(0, 2, 3);      
         LiveWindow.addActuator("Arms", "Double Solenoid 1", armsDoubleSolenoid1);
         
-        chassisBackLeft = new CANTalon(1);
-        //LiveWindow.addActuator("Chassis", "BackLeft", (TalonSRX) chassisBackLeft);
+        chassisBackLeft = new Talon(3);
+        LiveWindow.addActuator("Chassis", "BackLeft", (Talon) chassisBackLeft);
         
-        chassisBackRight = new CANTalon(3);
-        //LiveWindow.addActuator("Chassis", "BackRight", (TalonSRX) chassisBackRight);
+        chassisBackRight = new Talon(1);
+        LiveWindow.addActuator("Chassis", "BackRight", (Talon) chassisBackRight);
         
-        chassisFrontRight = new CANTalon(2);
-        //LiveWindow.addActuator("Chassis", "FrontRight", (TalonSRX) chassisFrontRight);
+        chassisFrontRight = new Talon(0);
+        LiveWindow.addActuator("Chassis", "FrontRight", (Talon) chassisFrontRight);
         
-        chassisFrontLeft = new CANTalon(0);
-        //LiveWindow.addActuator("Chassis", "FrontLeft", (TalonSRX) chassisFrontLeft);
+        chassisFrontLeft = new Talon(2);
+        LiveWindow.addActuator("Chassis", "FrontLeft", (Talon) chassisFrontLeft);
         
         chassisRobotDrive41 = new RobotDrive(chassisFrontLeft, chassisBackLeft,
               chassisFrontRight, chassisBackRight);
