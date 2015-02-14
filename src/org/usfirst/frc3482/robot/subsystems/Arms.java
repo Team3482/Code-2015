@@ -105,5 +105,17 @@ public class Arms extends Subsystem {
     	}
     }
     
+    public void moveUp() {
+    	arms.set(1);
+    }
+    
+    public void moveDown() {
+    	arms.set(-1);
+    }
+    
+    public void stop() {
+    	arms.set(0);
+    }
+    
 }
 
