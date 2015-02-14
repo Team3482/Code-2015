@@ -43,5 +43,54 @@ public class Chassis extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void invertMotors() {
+		robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		robotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+		robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		robotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+		System.out.println("YO THE MOTORS WERE JUST INVERTED, WATCH OUT MAN");
+	}
+    
+    public void startCompressor() {
+		compressor1.start();
+	}
+	public void stopCompressor() {
+		compressor1.stop();
+	}
+    
+	public void driveWithXboxController(Joystick s) {
+		double leftX = s.getRawAxis(0);
+		double leftY = s.getRawAxis(1);
+		double rightX = s.getRawAxis(4);
+		System.out.println("left x: " + leftX);
+		System.out.println("y: " + leftY);
+		System.out.println("right: " + rightX);
+		double deadZone = 0.2;
+
+		if (leftX < deadZone && leftX > -deadZone) {
+			leftX = 0;
+		}
+		if (leftY < deadZone && leftY > -deadZone) {
+			leftY = 0;
+		}
+		if (rightX < deadZone && rightX > -deadZone) {
+			rightX = 0;
+		}
+		
+		//TODO: Gyro
+		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, rightX, 0);
+
+	}
+
+	public void stop() {
+		robotDrive41.stopMotor();
+	}
+	
+	//sets the safety
+	public void setSafety(boolean n) {
+		robotDrive41.setSafetyEnabled(n);
+	}
+
 }
 
