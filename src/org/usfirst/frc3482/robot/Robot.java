@@ -11,10 +11,12 @@
 
 package org.usfirst.frc3482.robot;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc3482.robot.commands.*;
 import org.usfirst.frc3482.robot.subsystems.*;
 
@@ -94,6 +96,8 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         chassis.invertMotors();
+        chassis.calibrateGyro();
+        chassis.resetGyro();
     }
 
     /**

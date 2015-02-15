@@ -52,7 +52,18 @@ public class Chassis extends Subsystem {
 		System.out.println("YO THE MOTORS WERE JUST INVERTED, WATCH OUT MAN");
 	}
     
+    public void calibrateGyro() {
+    	System.out.println("calibrating");
+    	gyro1.initGyro();
+    }
+    
+    public void resetGyro() {
+    	System.out.println("reseting");
+    	gyro1.reset();
+    }
+    
     public void startCompressor() {
+    	System.out.println("starting");
 		compressor1.start();
 	}
 	public void stopCompressor() {
@@ -79,7 +90,7 @@ public class Chassis extends Subsystem {
 		}
 		
 		//TODO: Gyro
-		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, rightX, 0);
+		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, rightX, gyro1.getAngle());
 
 	}
 
