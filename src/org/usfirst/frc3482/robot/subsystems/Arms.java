@@ -49,11 +49,13 @@ public class Arms extends Subsystem {
     public void open()
     {
     	doubleSolenoid1.set(DoubleSolenoid.Value.kForward);
+    	System.out.println("open arms");
     }
     
     public void close()
     {
     	doubleSolenoid1.set(DoubleSolenoid.Value.kReverse);
+    	System.out.println("close arms");
     }
     
     // precondition:

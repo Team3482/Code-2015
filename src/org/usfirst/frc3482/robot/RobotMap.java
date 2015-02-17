@@ -64,7 +64,7 @@ public class RobotMap {
         armsLimitSwitch5 = new DigitalInput(4);
         LiveWindow.addSensor("Arms", "Limit Switch 5", armsLimitSwitch5);
         
-        armsDoubleSolenoid1 = new DoubleSolenoid(0, 2, 3);      
+        armsDoubleSolenoid1 = new DoubleSolenoid(0, 5, 4);      
         LiveWindow.addActuator("Arms", "Double Solenoid 1", armsDoubleSolenoid1);
         
         chassisBackLeft = new CANTalon(1);
