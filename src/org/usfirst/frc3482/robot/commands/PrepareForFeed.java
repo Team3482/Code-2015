@@ -17,9 +17,11 @@ import org.usfirst.frc3482.robot.Robot;
 /**
  *
  */
-public class  LowerArms extends Command {
+public class  PrepareForFeed extends Command {
 
-    public LowerArms() {
+	boolean finished = false;
+	
+    public PrepareForFeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -34,20 +36,23 @@ public class  LowerArms extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.arms.stepDown();
+    	Robot.arms.prepareForFeed();
+    	finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.arms.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

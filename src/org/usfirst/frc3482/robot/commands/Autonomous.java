@@ -13,7 +13,7 @@ public class Autonomous extends CommandGroup {
 	// 1: pull back two center trash cans
 	// 2: push forward one set of tote/trash can
 	// 3: push forward three sets of tote/trash can
-	int mode = 1;
+	int mode = 2;
 	
     public  Autonomous() {
         // Add Commands here:
@@ -37,10 +37,10 @@ public class Autonomous extends CommandGroup {
     	
     	if(mode == 1) {
     		addSequential(new ManualRaiseArms(), .5);
-    		addSequential(new Move(.5, 0, .25));
+    		addSequential(new Move(.5, 0, 0, .25), .25);
     	} else if(mode == 2) {
-    		addSequential(new OpenArms(true), .1);
-    		addSequential(new Move(-.8, 0, .5));
+    		addSequential(new ArmsToBottom());
+    		addSequential(new Move(0, .8, 0, .5), .5);
     	} else if(mode == 3) {
     		
     	}

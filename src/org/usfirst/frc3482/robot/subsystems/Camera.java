@@ -15,6 +15,8 @@ import org.usfirst.frc3482.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import org.opencv.core.Core;
+
 /**
  *
  */

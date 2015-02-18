@@ -99,9 +99,9 @@ public class Chassis extends Subsystem {
 	}
 	
 	//moves the robot to a location
-	public void move(double moveValue, double rotateValue) {
+	public void move(double moveValueY, double moveValueX, double rotateValue) {
 		//robotDrive41.arcadeDrive(moveValue, rotateValue);
-		robotDrive41.mecanumDrive_Cartesian(0, moveValue, rotateValue, gyro1.getAngle());
+		robotDrive41.mecanumDrive_Cartesian(moveValueX, moveValueY, rotateValue, gyro1.getAngle());
 	}
 
 	public void stop() {
