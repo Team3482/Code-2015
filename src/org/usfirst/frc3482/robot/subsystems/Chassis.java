@@ -78,6 +78,7 @@ public class Chassis extends Subsystem {
 		double leftX = s.getRawAxis(0);
 		double leftY = s.getRawAxis(1);
 		double rightX = s.getRawAxis(4);
+		
 		//System.out.println("left x: " + leftX);
 		//System.out.println("y: " + leftY);
 		//System.out.println("right: " + rightX);
@@ -95,6 +96,30 @@ public class Chassis extends Subsystem {
 		
 		//TODO: Gyro
 		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, rightX, gyro1.getAngle());
+
+	}
+	public void driveWithJoystick(Joystick s) {
+		double leftX = s.getRawAxis(0);
+		double leftY = s.getRawAxis(1);
+		double twist = s.getTwist();
+		
+		//System.out.println("left x: " + leftX);
+		//System.out.println("y: " + leftY);
+		//System.out.println("right: " + rightX);
+		double deadZone = 0.05;
+
+		if (leftX < deadZone && leftX > -deadZone) {
+			leftX = 0;
+		}
+		if (leftY < deadZone && leftY > -deadZone) {
+			leftY = 0;
+		}
+		if (twist < deadZone && twist > -deadZone) {
+			twist = 0;
+		}
+		
+		//TODO: Gyro
+		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, twist, gyro1.getAngle());
 
 	}
 	

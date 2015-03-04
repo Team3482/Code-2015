@@ -115,7 +115,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         //arms.printLimitSwitches();
-        chassis.driveWithXboxController(Robot.oi.xboxController);
+        //chassis.driveWithXboxController(Robot.oi.xboxController);
+        chassis.driveWithJoystick(Robot.oi.driveController);
     }
 
     /**
