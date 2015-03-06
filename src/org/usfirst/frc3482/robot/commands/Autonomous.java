@@ -4,7 +4,6 @@ import org.usfirst.frc3482.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
 /**
  *
  */
@@ -42,7 +41,15 @@ public class Autonomous extends CommandGroup {
     		addSequential(new ArmsToBottom());
     		addSequential(new Move(0, .8, 0, .5), .5);
     	} else if(mode == 3) {
-    		
+    		addSequential(new ArmsToBottom());
+    		addSequential(new Move(.5, 0, 0, .25), .25);
+    		addSequential(new Move(-.5, 0, 0, .25), .25);
+    		addSequential(new Move(0, 0.5, 0, .5), .5);
+    		addSequential(new Move(.5, 0, 0, .25), .25);
+    		addSequential(new Move(-.5, 0, 0, .25), .25);
+    		addSequential(new Move(0, 0.5, 0, .5), .5);
+    		addSequential(new Move(.5, 0, 0, .25), .25);
     	}
     }
 }
+													
