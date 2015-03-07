@@ -126,6 +126,15 @@ public class OI {
         closeArmsButton = new JoystickButton(xboxController, 3);
         closeArmsButton.whenPressed(new OpenArms(false));
         
+        toBottomButton = new JoystickButton(arcadeButtons, 2);
+        toBottomButton.whenPressed(new ArmsToBottom());
+
+        prepareForFeedButton = new JoystickButton(arcadeButtons, 7);
+        prepareForFeedButton.whenPressed(new PrepareForFeed());
+
+        toTopButton = new JoystickButton(arcadeButtons, 8);
+        toTopButton.whenPressed(new ArmsToTop());
+        
         //resetGyroButton = new JoystickButton(xboxController, 7);
         //resetGyroButton.toggleWhenPressed(new ResetGyro());
   
