@@ -84,8 +84,8 @@ public class OI {
         //arcadeButtons = new Joystick(1);
         
     	// Joystick buttons
-    	resetGyroButton = new JoystickButton(driveController, 2);
-        resetGyroButton.toggleWhenPressed(new ResetGyro());
+    	//resetGyroButton = new JoystickButton(driveController, 2);
+        //resetGyroButton.toggleWhenPressed(new ResetGyro());
     	
         // arcade buttons
         /*manualLowerArmsArcadeButton = new JoystickButton(arcadeButtons, 1);
@@ -96,7 +96,7 @@ public class OI {
         
         toBottomButton = new JoystickButton(arcadeButtons, 3);
         toBottomButton.whenPressed(new ArmsToBottom());
-
+        
         prepareForFeedButton = new JoystickButton(arcadeButtons, 4);
         prepareForFeedButton.whenPressed(new PrepareForFeed());
 
@@ -126,13 +126,13 @@ public class OI {
         closeArmsButton = new JoystickButton(xboxController, 3);
         closeArmsButton.whenPressed(new OpenArms(false));
         
-        toBottomButton = new JoystickButton(arcadeButtons, 2);
+        toBottomButton = new JoystickButton(xboxController, 2);
         toBottomButton.whenPressed(new ArmsToBottom());
 
-        prepareForFeedButton = new JoystickButton(arcadeButtons, 7);
+        prepareForFeedButton = new JoystickButton(xboxController, 7);
         prepareForFeedButton.whenPressed(new PrepareForFeed());
 
-        toTopButton = new JoystickButton(arcadeButtons, 8);
+        toTopButton = new JoystickButton(xboxController, 8);
         toTopButton.whenPressed(new ArmsToTop());
         
         //resetGyroButton = new JoystickButton(xboxController, 7);

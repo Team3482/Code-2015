@@ -12,9 +12,10 @@
 package org.usfirst.frc3482.robot.subsystems;
 
 import org.usfirst.frc3482.robot.RobotMap;
-import org.usfirst.frc3482.robot.commands.*;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 

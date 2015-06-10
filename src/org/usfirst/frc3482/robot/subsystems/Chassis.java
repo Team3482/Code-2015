@@ -11,10 +11,11 @@
 
 package org.usfirst.frc3482.robot.subsystems;
 
+import org.usfirst.frc3482.robot.Robot;
 import org.usfirst.frc3482.robot.RobotMap;
 import org.usfirst.frc3482.robot.commands.*;
-import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -56,15 +57,15 @@ public class Chassis extends Subsystem {
     	}
 	}
     
-//    public void calibrateGyro() {
-//    	System.out.println("calibrating");
-//    	imu.initGyro();
-//    }
-//    
-//    public void resetGyro() {
-//    	System.out.println("reseting");
-//    	imu.reset();
-//    }
+    /*public void calibrateGyro() {
+    	System.out.println("calibrating");
+    	Robot.imu.initGyro();
+    }
+    
+    public void resetGyro() {
+    	System.out.println("reseting");
+       	Robot.imu.reset();
+    }*/
     
     public void startCompressor() {
     	//System.out.println("starting");
@@ -99,13 +100,14 @@ public class Chassis extends Subsystem {
 
 	}
 	public void driveWithJoystick(Joystick s) {
+		double pi = 3.1415926;
 		double leftX = s.getRawAxis(0);
 		double leftY = s.getRawAxis(1);
 		double twist = s.getTwist();
-		
-		//System.out.println("left x: " + leftX);
-		//System.out.println("y: " + leftY);
-		//System.out.println("right: " + rightX);
+		double throttle = (1-s.getThrottle())/2;
+		double max = .7;
+		double min = .2;
+		double sensitivity = 1.0;
 		double deadZone = 0.125;
 
 		if (leftX < deadZone && leftX > -deadZone) {
@@ -118,9 +120,49 @@ public class Chassis extends Subsystem {
 			twist = 0;
 		}
 		
-		//TODO: Gyro
-		robotDrive41.mecanumDrive_Cartesian(leftX, leftY, twist, 0);
-
+		sensitivity = throttle*max+(1-throttle)*min;
+		if(s.getRawButton(1)) {
+			sensitivity = .8;
+		}
+		//System.out.println(sensitivity);
+		
+		// Thresholds for determining if currently off-balance/on-balance.
+		double offBalancePitchGyroAngleThresholdDegrees = 10/2;
+		double onBalancePitchGyroAngleThresholdDegrees  = 5/2;
+		boolean autoBalanceMode = false;
+        double curr_gyro_angle_degrees = 0;
+        double pitchAngle = 0;
+        
+        if(Robot.imu.isConnected()) {
+        	curr_gyro_angle_degrees = Robot.imu.getYaw();
+        	pitchAngle = Robot.imu.getPitch();
+        	//System.out.println(pitchAngle);
+        }
+        double curr_gyro_angle_radians = curr_gyro_angle_degrees*pi/180;
+		                
+		// Determine whether assisted balance mode is in effect;
+		if (!autoBalanceMode && (pitchAngle >= offBalancePitchGyroAngleThresholdDegrees)) {
+			autoBalanceMode = true;
+		}
+		else if (autoBalanceMode && (pitchAngle <= (-onBalancePitchGyroAngleThresholdDegrees))) {
+			autoBalanceMode = false;
+		}
+		
+		if(autoBalanceMode) {
+			double pitchAngleRadians = pitchAngle * (3.1415926 / 180.0);
+			double driveRate = Math.sin(pitchAngleRadians)*-1;
+			robotDrive41.mecanumDrive_Cartesian(0, driveRate, 0, 0);
+		} else {
+	        double strafe = leftX;
+	        double fwd = -leftY;
+	        double rcw = twist;
+	        
+	        double temp = fwd * Math.cos( curr_gyro_angle_radians ) + strafe * Math.sin( curr_gyro_angle_radians);
+	        strafe = -fwd * Math.sin( curr_gyro_angle_radians ) + strafe * Math.cos( curr_gyro_angle_radians );
+	        fwd = temp;
+	        
+	        robotDrive41.mecanumDrive_Cartesian(strafe*sensitivity, -fwd*sensitivity, rcw*sensitivity, 0);
+		}
 	}
 	
 	//moves the robot to a location
