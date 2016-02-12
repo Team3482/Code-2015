@@ -35,7 +35,7 @@ public class  ExtendRamp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ramp.extend();
+    	Robot.ramp.retract();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -45,7 +45,7 @@ public class  ExtendRamp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ramp.retract();
+    	Robot.ramp.extend();
     }
 
     // Called when another command which requires one or more of the same
